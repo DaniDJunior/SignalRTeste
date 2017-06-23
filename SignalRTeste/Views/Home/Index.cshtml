@@ -20,7 +20,7 @@
     </div>
 </div>
 <div class="row" id="divBtnLogin">
-    <div class="col-md-12 pull-right">
+    <div class="col-md-12">
         <a class="btn btn-default" onclick="connectChat()" role="button">Entrar</a>
     </div>
 </div>
@@ -42,7 +42,7 @@
     </div>
 </div>
 <div class="row" id="divBtnMessage">
-    <div class="col-md-12 pull-right">
+    <div class="col-md-12">
         <a class="btn btn-default" onclick="sendMessage()" role="button">Entrar</a>
     </div>
 </div>
@@ -88,12 +88,16 @@
         $("#lblTitulo").text(message);
     }
 
+    $.connection.teste.client.MessageNewUser = function (message) {
+        //alert(message);
+    }
+
     $.connection.teste.client.MessageReciever = function (name, message) {
-        $('<div class="col-md-12"><div class="alert alert-success" role="alert"><p><strong>Message recebida de ' + name + '</strong></p><p>' + message + '</p></div></div><br clear="all" />').appendTo($("#divMessage"));
+        $('<div class="col-md-12"><div class="alert alert-success" role="alert"><p><strong>Message recebida de ' + name + '</strong></p><p>' + message + '</p></div></div>').appendTo($("#divMessage"));
     }
 
     $.connection.teste.client.MessageEco = function (message) {
-        $('<div class="col-md-12 pull-right"><div class="alert alert-info" role="alert"><p><strong>Message enviada para ' + $("#txtDestino").val() + '</strong></p><p>' + message + '</p></div></div><br clear="all" />').appendTo($("#divMessage"));
+        $('<div class="col-md-12"><div class="alert alert-info" role="alert"><p><strong>Message enviada para ' + $("#txtDestino").val() + '</strong></p><p>' + message + '</p></div></div>').appendTo($("#divMessage"));
         $('#divErro').hide();
     }
 

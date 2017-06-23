@@ -25,6 +25,15 @@ namespace SignalRTeste.Hubs
             {
                 CacheHelper.Add<string>(Context.ConnectionId, "Client_" + nome);
                 Clients.Caller.ConnectionSucess("Chat conectado para " + nome);
+                if (CacheHelper.Exists("Client"))
+                {
+                    CacheHelper.Add<string>(CacheHelper.Get<string>("Client") + "," + nome, "Client");
+                }
+                else
+                {
+                    CacheHelper.Add<string>(nome, "Client");
+                }
+                Clients.All.MessageNewUser(CacheHelper.Get<string>("Client"));
             }
         }
 
