@@ -28,11 +28,11 @@ namespace SignalRTeste.Hubs
             }
         }
 
-        public void SendMessange(string nome, string message)
+        public void SendMessange(string nome, string message, string origem)
         {
             if (CacheHelper.Exists("Client_" + nome))
             {
-                Clients.Client(CacheHelper.Get<string>("Client_" + nome)).MessageReciever(nome, DateTime.Now.ToString("HH:mm:ss") + "-" + message);
+                Clients.Client(CacheHelper.Get<string>("Client_" + nome)).MessageReciever(origem, DateTime.Now.ToString("HH:mm:ss") + "-" + message);
                 Clients.Caller.MessageEco(DateTime.Now.ToString("HH:mm:ss") + "-" + message);
             }
             else

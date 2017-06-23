@@ -70,7 +70,7 @@
     }
 
     function sendMessage() {
-        $.connection.teste.server.sendMessange($("#txtDestino").val(), $("#txtMensagem").val());
+        $.connection.teste.server.sendMessange($("#txtDestino").val(), $("#txtMensagem").val(), $("#txtNome").val());
     }
 
     $.connection.hub.start().done(function () {
@@ -93,7 +93,8 @@
     }
 
     $.connection.teste.client.MessageEco = function (message) {
-        $('<div class="col-md-12 pull-right"><div class="alert alert-info" role="alert"><p><strong>Message enviada para ' + $("#txtNome").val() + '</strong></p><p>' + message + '</p></div></div><br clear="all" />').appendTo($("#divMessage"));
+        $('<div class="col-md-12 pull-right"><div class="alert alert-info" role="alert"><p><strong>Message enviada para ' + $("#txtDestino").val() + '</strong></p><p>' + message + '</p></div></div><br clear="all" />').appendTo($("#divMessage"));
+        $('#divErro').hide();
     }
 
     $.connection.teste.client.MessageError = function (message) {
