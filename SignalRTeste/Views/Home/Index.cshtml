@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="page-header">Chat</h1>
+    </div>
+</div>
+<div class="row" id="divTitulo">
+    <div class="col-md-12">
+        <h2 id="lblTitulo"></h2>
+    </div>
+</div>
+<div class="row" id="divFrmLogin">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="txtNome">Email do Usuario:</label>
+            <input type="email" class="form-control" id="txtNome" placeholder="Email">
+        </div>
+    </div>
+</div>
+<div class="row" id="divBtnLogin">
+    <div class="col-md-12 pull-right">
+        <a class="btn btn-default" onclick="connectChat()" role="button">Entrar</a>
+    </div>
+</div>
+<div class="row" id="divMessage">
+    
+</div>
+<div class="row" id="divFrmMessage">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="txtDestino">Email de destino:</label>
+            <input type="email" class="form-control" id="txtDestino" placeholder="Email">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="txtNome">txtMensagem:</label>
+            <input type="email" class="form-control" id="txtMensagem">
+        </div>
+    </div>
+</div>
+<div class="row" id="divBtnMessage">
+    <div class="col-md-12 pull-right">
+        <a class="btn btn-default" onclick="sendMessage()" role="button">Entrar</a>
+    </div>
+</div>
+<div class="row" id="divErro">
+    <div class="col-md-12">
+        <div class="alert alert-danger" role="alert"><span id="spnErro"></span></div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery.signalR-2.1.2.min.js"></script>
+<script src="/SignalR/Hubs"></script>
+
+<script>
+
+    $(function () {
+        $('#divErro').hide();
+        $('#divMessage').hide();
+        $('#divFrmMessage').hide();
+        $('#divBtnMessage').hide();
+    });
+
+    function connectChat()
+    {
+        $.connection.teste.server.createConnection($("#txtNome").val());
+    }
+
+    function sendMessage() {
+        $.connection.teste.server.sendMessange($("#txtDestino").val(), $("#txtMensagem").val());
+    }
+
+    $.connection.hub.start().done(function () {
+        //$.connection.teste.server.createConnection('Teste');
+    });
+
+    $.connection.teste.client.ConnectionSucess = function (message) {
+        $('#divFrmLogin').hide();
+        $('#divBtnLogin').hide();
+        $('#divErro').hide();
+        $('#divTitulo').show();
+        $('#divMessage').show();
+        $('#divFrmMessage').show();
+        $('#divBtnMessage').show();
+        $("#lblTitulo").text(message);
+    }
+
+    $.connection.teste.client.MessageReciever = function (name, message) {
+        $('<div class="col-md-12"><div class="alert alert-success" role="alert"><p><strong>Message recebida de ' + name + '</strong></p><p>' + message + '</p></div></div><br clear="all" />').appendTo($("#divMessage"));
+    }
+
+    $.connection.teste.client.MessageEco = function (message) {
+        $('<div class="col-md-12 pull-right"><div class="alert alert-info" role="alert"><p><strong>Message enviada para ' + $("#txtNome").val() + '</strong></p><p>' + message + '</p></div></div><br clear="all" />').appendTo($("#divMessage"));
+    }
+
+    $.connection.teste.client.MessageError = function (message) {
+        $('#divErro').show();
+        $("#spnErro").text(message);
+    }
+</script>
