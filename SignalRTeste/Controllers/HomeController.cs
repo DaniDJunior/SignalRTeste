@@ -29,5 +29,12 @@ namespace SignalRTeste.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult UpdateAll(string txtMessage)//, int? PacSize)
+        {
+            Hubs.DisparaHub.dispara(txtMessage);
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -1,17 +1,25 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="page-header">Mensagem para todos</h1>
+    </div>
+</div>
+@using (Html.BeginForm("UpdateAll", "Home", FormMethod.Post))
+{
+<div class="row" id="divFrmLogin">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="txtMessage">Menssagem:</label>
+            <input type="text" class="form-control" id="txtMessage" name="txtMessage">
+        </div>
+    </div>
+</div>
+<div class="row" id="divBtnLogin">
+    <div class="col-md-12">
+        <button type="submit" class="btn btn-default">Entrar</button>
+    </div>
+</div>
+}
