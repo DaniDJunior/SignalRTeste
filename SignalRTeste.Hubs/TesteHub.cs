@@ -41,8 +41,7 @@ namespace SignalRTeste.Hubs
         {
             if (CacheHelper.Exists("Client_" + nome))
             {
-                Clients.Client("9015fe75-10a7-49e4-bf96-1f8ff37b22b8").MessageReciever(origem, DateTime.Now.ToString("HH:mm:ss") + "-" + message);
-                Clients.Client(CacheHelper.Get<string>("Client_" + nome)).MessageReciever(origem, DateTime.Now.ToString("HH:mm:ss") + "-" + message);
+                Clients.Client(CacheHelper.Get<string>("Client_" + nome)).MessageReciever(new modelo(origem, message)); // origem, DateTime.Now.ToString("HH:mm:ss") + "-" + message);
                 Clients.Caller.MessageEco(DateTime.Now.ToString("HH:mm:ss") + "-" + message);
             }
             else

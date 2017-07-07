@@ -92,8 +92,8 @@
         //alert(message);
     }
 
-    $.connection.teste.client.MessageReciever = function (name, message) {
-        $('<div class="col-md-12"><div class="alert alert-success" role="alert"><p><strong>Message recebida de ' + name + '</strong></p><p>' + message + '</p></div></div>').appendTo($("#divMessage"));
+    $.connection.teste.client.MessageReciever = function (modelo) {
+        $('<div class="col-md-12"><div class="alert alert-success" role="alert"><p><strong>Message recebida de ' + modelo.nome + '</strong></p><p>' + modelo.message + '</p></div></div>').appendTo($("#divMessage"));
     }
 
     $.connection.teste.client.MessageEco = function (message) {
