@@ -11,6 +11,7 @@ namespace SignalRTeste
         public void Configuration(IAppBuilder app)
         {
             app.MapSignalR();
+            new App_Start.Service().Start(5000);
         }
     }
 }
